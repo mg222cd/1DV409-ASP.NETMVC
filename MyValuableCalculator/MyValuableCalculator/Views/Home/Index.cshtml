@@ -1,0 +1,25 @@
+﻿@model MyValuableCalculator.Models.ElementaryMath
+
+@{
+    ViewBag.Title = "My Valuable Calculator";
+}
+
+<h2>My Valuable Calculator</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("The calculation failed. Please correct the errors and try again.")
+    @Html.TextBoxFor(m => m.Op1)
+    @:+
+    @Html.TextBoxFor(m => m.Op2)
+    <input type="submit" value="=" />
+    @Html.DisplayTextFor(m => m.Result)
+}
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#Op1").focus();
+        });
+    </script>
+}

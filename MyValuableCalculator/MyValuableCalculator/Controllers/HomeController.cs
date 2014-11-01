@@ -18,5 +18,17 @@ namespace MyValuableCalculator.Controllers
             return View(model);
         }
 
+        //
+        // POST: /Home/
+
+        [HttpPost]
+        public ActionResult Index(ElementaryMath elementaryMath)
+        {
+            if (ModelState.IsValid)
+            {
+                elementaryMath.Compute();
+            }
+            return View(elementaryMath);
+        }
     }
 }
