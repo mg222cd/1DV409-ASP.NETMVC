@@ -6,8 +6,12 @@ using System.Web;
 
 namespace MyValuableCalculator.Models
 {
+    public enum ArithmeticOperation { Addition, Subtraction, Multiplication, Division }
+
     public class ElementaryMath
     {
+        public ArithmeticOperation ArithmeticOperation { get; set; }
+
         [Required]
         public int Op1 { get; set; }
 
@@ -18,7 +22,24 @@ namespace MyValuableCalculator.Models
 
         public void Compute()
         {
-            this.Result = this.Op1 + this.Op2;
+            switch (this.ArithmeticOperation)
+            {
+                case ArithmeticOperation.Addition:
+                    this.Result = this.Op1 + this.Op2;
+                    break;
+
+                case ArithmeticOperation.Subtraction:
+                    this.Result = this.Op1 - this.Op2;
+                    break;
+
+                case ArithmeticOperation.Multiplication:
+                    this.Result = this.Op1 * this.Op2;
+                    break;
+
+                case ArithmeticOperation.Division:
+                    this.Result = this.Op1 / this.Op2;
+                    break;
+            }
         }
     }
 }
