@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyValuableCalculator.ViewModels;
 
 namespace MyValuableCalculator.Controllers
 {
@@ -14,7 +15,10 @@ namespace MyValuableCalculator.Controllers
 
         public ActionResult Index()
         {
-            var model = new ElementaryMath();
+            var model = new HomeIndexViewModel
+            {
+                ElementaryMath = new ElementaryMath()
+            };
             return View(model);
         }
 
@@ -26,9 +30,22 @@ namespace MyValuableCalculator.Controllers
         {
             if (ModelState.IsValid)
             {
-                elementaryMath.Compute();
+                try
+                {
+                    elementaryMath.Compute();
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.Message);
+                }
             }
-            return View(elementaryMath);
+
+            var model = new HomeIndexViewModel
+            {
+                ElementaryMath = elementaryMath
+            };
+
+            return View(model);
         }
     }
 }
