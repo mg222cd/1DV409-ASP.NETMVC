@@ -21,11 +21,28 @@ namespace GeekGuestbook.Controllers
         }
 
         //
+        // GET: /Guestbook/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
         // POST: /Guestbook/Create
         [HttpPost]
         public ActionResult Create(Message model)
         {
-            return View();
+            //datumet
+            model.Created = DateTime.Now;
+
+            //lägger till den lokala samlingen
+            _enteties.Messages.Add(model);
+
+            //lägger till databasen
+            _enteties.SaveChanges();
+
+            //tillbaka till listan med inlägg
+            return RedirectToAction("Index");
         }
 
 
