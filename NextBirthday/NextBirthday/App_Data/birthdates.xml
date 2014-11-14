@@ -16,4 +16,16 @@
     <name>Marike</name>
     <date>1984-09-25T00:00:00</date>
   </birthdate>
+  <birthdate>
+    <name>Andreas</name>
+    <date>1974-07-18T00:00:00</date>
+  </birthdate>
+  <birthdate>
+    <name>Bill</name>
+    <date>2012-11-28T00:00:00</date>
+  </birthdate>
+  <birthdate>
+    <name>Ville</name>
+    <date>2005-10-27T00:00:00</date>
+  </birthdate>
 </birthdates>

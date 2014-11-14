@@ -1,4 +1,5 @@
 ﻿using NextBirthday.Models;
+using NextBirthday.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ namespace NextBirthday.Controllers
 {
     public class BirthdayController : Controller
     {
+
+        XmlRepository _repository = new XmlRepository();
         //
         // GET: /Birthday/
         public ActionResult Index()
         {
            
-            return View();
+            return View(_repository.GetBirthdays());
         }
 
         //
@@ -33,15 +36,8 @@ namespace NextBirthday.Controllers
         {
             if (ModelState.IsValid)
             {
-                var path = Server.MapPath("~/App_Data/birthdates.xml");
-                var doc = XDocument.Load(path);
-
-                var element = new XElement("birthdate",
-                    new XElement("name", birthday.Name),
-                    new XElement("date", birthday.Birthdate));
-
-                doc.Root.Add(element);
-                doc.Save(path);
+                _repository.InsertBirthday(birthday);
+                _repository.Save();
 
                 return RedirectToAction("Index");
             }
