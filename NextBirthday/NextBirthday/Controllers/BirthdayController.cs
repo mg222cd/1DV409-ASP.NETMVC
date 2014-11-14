@@ -39,6 +39,21 @@ namespace NextBirthday.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Birthday birthday)
         {
+            if (ModelState.IsValid)
+            {
+                var path = Server.MapPath("~/App_Data/birthdates.xml");
+                var doc = XDocument.Load(path);
+
+                var element = new XElement("birthdate",
+                    new XElement("name", birthday.Name),
+                    new XElement("date", birthday.Birthdate));
+
+                doc.Root.Add(element);
+                doc.Save(path);
+
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
