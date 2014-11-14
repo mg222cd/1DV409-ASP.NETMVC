@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace NextBirthday.Models.Repositories
 {
-    public class XmlRepository
+    public class XmlRepository : IRepository
     {
         private static readonly string PhysicalPath;
 
