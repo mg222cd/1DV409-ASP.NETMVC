@@ -12,7 +12,19 @@ namespace NextBirthday.Controllers
     public class BirthdayController : Controller
     {
 
-        XmlRepository _repository = new XmlRepository();
+        IRepository _repository;
+
+        public BirthdayController()
+            :this(new XmlRepository())
+        {
+
+        }
+
+        public BirthdayController(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         //
         // GET: /Birthday/
         public ActionResult Index()
