@@ -14,7 +14,7 @@ namespace NextBirthday.Controllers
         // GET: /Birthday/
         public ActionResult Index()
         {
-            var path = Server.MapPath("~App_Data/birthdates.xml");
+            var path = Server.MapPath("~/App_Data/birthdates.xml");
             var doc = XDocument.Load(path);
             var model = (from birthdate in doc.Descendants("birthdate")
                          select new Birthday 
