@@ -14,7 +14,7 @@ namespace NextBirthday
             // register all your components with the container here
             // it is NOT necessary to register your controllers
             
-            container.RegisterType<IRepository, XmlRepository>();
+            //container.RegisterType<IRepository, XmlRepository>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
