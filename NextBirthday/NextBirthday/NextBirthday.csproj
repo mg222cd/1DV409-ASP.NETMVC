@@ -176,6 +176,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeekBirthdayModel.edmx</DependentUpon>
       <LastGenOutput>GeekBirthdayModel.Context.cs</LastGenOutput>
+      <CustomToolNamespace>NextBirthday.Models</CustomToolNamespace>
     </Content>
     <Content Include="Models\DataModels\GeekBirthdayModel.edmx.diagram">
       <DependentUpon>GeekBirthdayModel.edmx</DependentUpon>
@@ -184,6 +185,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeekBirthdayModel.edmx</DependentUpon>
       <LastGenOutput>GeekBirthdayModel.cs</LastGenOutput>
+      <CustomToolNamespace>NextBirthday.Models</CustomToolNamespace>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

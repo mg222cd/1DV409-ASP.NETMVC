@@ -5,18 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NextBirthday.Models
 {
-    public class Birthday
+    [MetadataType(typeof(Birthday_Metadata))]
+    public partial class Birthday
     {
-        [Required(ErrorMessage = "Födelsedatum måste anges.")]
-        [BeforeToday(ErrorMessage = "Ett födelsedatum tidigare än dagens datum måste anges.")]
-        [DataType(DataType.Date)]
-        [DisplayName("Födelsedatum")]
-        public DateTime Birthdate { get; set; }
-
-        [Required(ErrorMessage = "Namn måste anges.")]
-        [DisplayName("Namn")]
-        public string Name { get; set; }
-
+        [ScaffoldColumn(false)]
         public int Age
         {
             get
@@ -25,6 +17,7 @@ namespace NextBirthday.Models
             }
         }
 
+        [ScaffoldColumn(false)]
         public int DaysUntilNextBirthday
         {
             get
@@ -33,6 +26,7 @@ namespace NextBirthday.Models
             }
         }
 
+        [ScaffoldColumn(false)]
         public DateTime NextBirthdayDate
         {
             get
@@ -46,6 +40,19 @@ namespace NextBirthday.Models
 
                 return nextBirthday;
             }
+        }
+
+        public class Birthday_Metadata
+        {
+            [Required(ErrorMessage = "Födelsedatum måste anges.")]
+            [BeforeToday(ErrorMessage = "Ett födelsedatum tidigare än dagens datum måste anges.")]
+            [DataType(DataType.Date)]
+            [DisplayName("Födelsedatum")]
+            public DateTime Birthdate { get; set; }
+
+            [Required(ErrorMessage = "Namn måste anges.")]
+            [DisplayName("Namn")]
+            public string Name { get; set; }
         }
     }
 }
