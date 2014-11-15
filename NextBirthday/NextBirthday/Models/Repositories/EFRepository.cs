@@ -16,12 +16,12 @@ namespace NextBirthday.Models.Repositories
 
         public void InsertBirthday(Birthday birthday)
         {
-            throw new NotImplementedException();
+            _enteties.Birthdays.Add(birthday);
         }
 
-        public void Sace()
+        public void Save()
         {
-            throw new NotImplementedException();
+            _enteties.SaveChanges();
         }
     }
 }

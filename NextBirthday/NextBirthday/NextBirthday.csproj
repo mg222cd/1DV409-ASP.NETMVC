@@ -153,6 +153,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeekBirthdayModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\EFRepository.cs" />
     <Compile Include="Models\Repositories\IRepository.cs" />
     <Compile Include="Models\Repositories\XmlRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

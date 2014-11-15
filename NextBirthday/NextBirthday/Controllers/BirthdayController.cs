@@ -15,7 +15,7 @@ namespace NextBirthday.Controllers
         IRepository _repository;
 
         public BirthdayController()
-            :this(new XmlRepository())
+            :this(new EFRepository())
         {
 
         }
