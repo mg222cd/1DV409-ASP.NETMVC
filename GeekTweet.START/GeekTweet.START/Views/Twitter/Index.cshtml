@@ -1,0 +1,12 @@
+﻿@model IEnumerable<GeekTweet.START.Models.Tweet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="tweets">
+    <h2>
+        The Latest Tweets by ScottGu
+    </h2>
+    @Html.DisplayFor(m => m)
+</div>
