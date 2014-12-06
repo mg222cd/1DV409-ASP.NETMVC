@@ -1,4 +1,5 @@
 ﻿using GeekTweet.START.Models.Webservices;
+using GeekTweet.START.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,31 @@ namespace GeekTweet.START.Controllers
 {
     public class TwitterController : Controller
     {
-        //
         // GET: /Twitter/
         public ActionResult Index()
         {
-            var webservice = new TwitterWebservice();
-            var tweets = webservice.GetUserTimeline("polisen_kalmar");
+            return View();
+        }
+
+        // GET: /Twitter/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include="ScreenName")] TwitterIndexViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var webservice = new TwitterWebservice();
+                    model.Tweets = webservice.GetUserTimeline(model.ScreenName);   
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.Message);
+            }
             
-            return View(tweets);
+            return View(model);
         }
 	}
 }
