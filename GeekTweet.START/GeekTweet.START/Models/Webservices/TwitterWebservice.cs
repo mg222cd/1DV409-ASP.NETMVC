@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using GeekTweet.Models.Webservices;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,10 +21,17 @@ namespace GeekTweet.START.Models.Webservices
             //    rawJson = reader.ReadToEnd();
             //}
 
+            //nyckel för förfrågningar
+            var oAuthTwitterWrapper = new OAuthTwitterWrapper();
+            var accessToken = oAuthTwitterWrapper.GetAccessToken();
+
             //URI för att ställa fråga.
             var requestUriString = String.Format("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={0}&count=5", screenName);
             var request = (HttpWebRequest)WebRequest.Create(requestUriString);
+            //komplettering av headern med authentisering
+            request.Headers.Add("Authorization", String.Format("{0} {1}", accessToken.Type, accessToken.Token));
 
+            //man måste nästla för att stängning ska ske automatiskt
             using(var response = request.GetResponse())
             using (var reader = new StreamReader(response.GetResponseStream()))
             {

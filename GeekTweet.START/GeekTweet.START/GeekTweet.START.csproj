@@ -118,6 +118,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Models\Webservices\OAuthTwitterWrapper.cs" />
     <Compile Include="Models\Webservices\TwitterWebservice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

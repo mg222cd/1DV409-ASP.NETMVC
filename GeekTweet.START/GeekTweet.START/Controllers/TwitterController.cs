@@ -14,7 +14,7 @@ namespace GeekTweet.START.Controllers
         public ActionResult Index()
         {
             var webservice = new TwitterWebservice();
-            var tweets = webservice.GetUserTimeline("schottgu");
+            var tweets = webservice.GetUserTimeline("polisen_kalmar");
             
             return View(tweets);
         }
