@@ -39,11 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -117,7 +122,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\GeekTweetModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeekTweetModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\GeekTweetModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeekTweetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\GeekTweetModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeekTweetModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\Tweet.cs">
+      <DependentUpon>GeekTweetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\User.cs">
+      <DependentUpon>GeekTweetModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModels\TwitterIndexViewModel.cs" />
     <Compile Include="Models\Webservices\OAuthTwitterWrapper.cs" />
     <Compile Include="Models\Webservices\TwitterWebservice.cs" />
@@ -133,6 +160,25 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Data\scottgu_timeline.json" />
+    <EntityDeploy Include="Models\DataModels\GeekTweetModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GeekTweetModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataModels\GeekTweetModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeekTweetModel.edmx</DependentUpon>
+      <LastGenOutput>GeekTweetModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataModels\GeekTweetModel.edmx.diagram">
+      <DependentUpon>GeekTweetModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DataModels\GeekTweetModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeekTweetModel.edmx</DependentUpon>
+      <LastGenOutput>GeekTweetModel.cs</LastGenOutput>
+      <CustomToolNamespace>GeekTweet.Models</CustomToolNamespace>
+    </Content>
+    <Content Include="App_Data\scottgu_user.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -158,7 +204,9 @@
     <Content Include="Views\Shared\DisplayTemplates\Tweet.cshtml" />
     <Content Include="Views\Twitter\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

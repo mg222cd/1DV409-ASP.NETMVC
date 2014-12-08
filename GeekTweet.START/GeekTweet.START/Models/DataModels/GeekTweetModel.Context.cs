@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeekTweet.START.Models.DataModels
+namespace GeekTweet.START.Models
 {
     using System;
     using System.Data.Entity;
