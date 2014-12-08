@@ -139,6 +139,25 @@
                 <ScalarProperty Name="Text" ColumnName="Text" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GeekTweet.Models.DataModels.Tweet">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GeekTweet.Models.DataModels.Store.InsertTweet">
+                  <ScalarProperty Name="CreatedAt" ParameterName="CreatedAt" />
+                  <ScalarProperty Name="Text" ParameterName="Text" />
+                  <ScalarProperty Name="UserId" ParameterName="UserId" />
+                  <ResultBinding Name="TweetId" ColumnName="NewTweetId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GeekTweet.Models.DataModels.Store.UpdateTweet">
+                  <ScalarProperty Name="CreatedAt" ParameterName="CreatedAt" Version="Current" />
+                  <ScalarProperty Name="Text" ParameterName="Text" Version="Current" />
+                  <ScalarProperty Name="UserId" ParameterName="UserId" Version="Current" />
+                  <ScalarProperty Name="TweetId" ParameterName="TweetId" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GeekTweet.Models.DataModels.Store.DeleteTweet">
+                  <ScalarProperty Name="TweetId" ParameterName="TweetId" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GeekTweet.Models.DataModels.User">
@@ -149,6 +168,27 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GeekTweet.Models.DataModels.User">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GeekTweet.Models.DataModels.Store.InsertUser">
+                  <ScalarProperty Name="NextUpdate" ParameterName="NextUpdate" />
+                  <ScalarProperty Name="ScreenName" ParameterName="ScreenName" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ScalarProperty Name="Id" ParameterName="Id" />
+                  <ResultBinding Name="UserId" ColumnName="NewUserId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GeekTweet.Models.DataModels.Store.UpdateUser">
+                  <ScalarProperty Name="NextUpdate" ParameterName="NextUpdate" Version="Current" />
+                  <ScalarProperty Name="ScreenName" ParameterName="ScreenName" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="Id" ParameterName="Id" Version="Current" />
+                  <ScalarProperty Name="UserId" ParameterName="UserId" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GeekTweet.Models.DataModels.Store.DeleteUser">
+                  <ScalarProperty Name="UserId" ParameterName="UserId" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>
