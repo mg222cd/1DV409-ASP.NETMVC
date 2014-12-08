@@ -143,6 +143,9 @@
     <Compile Include="Models\DataModels\User.cs">
       <DependentUpon>GeekTweetModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\GeekTweetRepository.cs" />
+    <Compile Include="Models\Repositories\GeekTweetRepositoryBase.cs" />
+    <Compile Include="Models\Repositories\IGeekTweetRepository.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModels\TwitterIndexViewModel.cs" />
@@ -168,6 +171,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeekTweetModel.edmx</DependentUpon>
       <LastGenOutput>GeekTweetModel.Context.cs</LastGenOutput>
+      <CustomToolNamespace>GeekTweet.START.Models</CustomToolNamespace>
     </Content>
     <Content Include="Models\DataModels\GeekTweetModel.edmx.diagram">
       <DependentUpon>GeekTweetModel.edmx</DependentUpon>
@@ -176,7 +180,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeekTweetModel.edmx</DependentUpon>
       <LastGenOutput>GeekTweetModel.cs</LastGenOutput>
-      <CustomToolNamespace>GeekTweet.Models</CustomToolNamespace>
+      <CustomToolNamespace>GeekTweet.START.Models</CustomToolNamespace>
     </Content>
     <Content Include="App_Data\scottgu_user.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
