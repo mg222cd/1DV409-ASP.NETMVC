@@ -12,7 +12,7 @@ namespace GeekTweet.START.Models.Repositories
         private GeekTweetEntities _context = new GeekTweetEntities();
 
         //Tweet
-        protected IQueryable<Tweet> QueryTweets()
+        protected override IQueryable<Tweet> QueryTweets()
         {
             return _context.Tweets.AsQueryable();
         }

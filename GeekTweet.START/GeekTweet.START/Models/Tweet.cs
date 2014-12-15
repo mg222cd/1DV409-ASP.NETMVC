@@ -14,13 +14,13 @@ namespace GeekTweet.START.Models
             //Empty!
         }
 
-        public Tweet(JToken tweetToken)
+        public Tweet(JToken tweetToken, User user)
         {
             Text = (string)tweetToken["text"];
             CreatedAt = DateTime.ParseExact((string)tweetToken["created_at"],
                 "ddd MMM dd HH:mm:ss zz00 yyyy", CultureInfo.InvariantCulture);
-            UserId = User.UserId;
-            User = User;
+            UserId = user.UserId;
+            User = user;
         }
     }
 }

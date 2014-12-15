@@ -8,7 +8,7 @@ namespace GeekTweet.START.Models.Repositories
     public abstract class GeekTweetRepositoryBase : IGeekTweetRepository
     {
         // Tweet
-        protected IQueryable<Tweet> QueryTweets();
+        protected abstract IQueryable<Tweet> QueryTweets();
 
         public IEnumerable<Tweet> FindAllTweets()
         {

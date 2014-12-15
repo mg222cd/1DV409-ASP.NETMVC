@@ -1,4 +1,5 @@
-﻿using GeekTweet.START.Models.Webservices;
+﻿using GeekTweet.START.Models;
+using GeekTweet.START.Models.Webservices;
 using GeekTweet.START.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,31 +11,72 @@ namespace GeekTweet.START.Controllers
 {
     public class TwitterController : Controller
     {
-        // GET: /Twitter/
+        #region Fields
+
+        private IGeekTweetService _service;
+
+        #endregion
+
+        #region Constructors
+
+        public TwitterController()
+            : this(new GeekTweetService())
+        {
+            // Empty!
+        }
+
+        public TwitterController(IGeekTweetService service)
+        {
+            _service = service;
+        }
+
+        #endregion
+
+        #region Index
+
+        // GET: /
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: /Twitter/
+        // POST: /
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include="ScreenName")] TwitterIndexViewModel model)
+        public ActionResult Index([Bind(Include = "ScreenName")] TwitterIndexViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var webservice = new TwitterWebservice();
-                    model.Tweets = webservice.GetUserTimeline(model.ScreenName);   
+                    model.User = _service.GetUSer(model.ScreenName);
+                    _service.RefreshTweet(model.User);
                 }
             }
             catch (Exception ex)
             {
+                // Get the innermost exception.
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+
                 ModelState.AddModelError(String.Empty, ex.Message);
             }
-            
+
             return View(model);
         }
-	}
+
+        #endregion
+
+        #region IDisposable
+
+        protected override void Dispose(bool disposing)
+        {
+            _service.Dispose();
+            base.Dispose(disposing);
+        }
+
+        #endregion
+    }
 }

@@ -143,12 +143,16 @@
     <Compile Include="Models\DataModels\User.cs">
       <DependentUpon>GeekTweetModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GeekTweetService.cs" />
+    <Compile Include="Models\GeekTweetServiceBase.cs" />
+    <Compile Include="Models\IGeekTweetService.cs" />
     <Compile Include="Models\Repositories\GeekTweetRepository.cs" />
     <Compile Include="Models\Repositories\GeekTweetRepositoryBase.cs" />
     <Compile Include="Models\Repositories\IGeekTweetRepository.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModels\TwitterIndexViewModel.cs" />
+    <Compile Include="Models\Webservices\ITwitterWebservice.cs" />
     <Compile Include="Models\Webservices\OAuthTwitterWrapper.cs" />
     <Compile Include="Models\Webservices\TwitterWebservice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

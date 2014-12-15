@@ -9,37 +9,91 @@ using System.Web;
 
 namespace GeekTweet.START.Models.Webservices
 {
-    public class TwitterWebservice
+    public class TwitterWebservice : ITwitterWebservice
     {
-        public IEnumerable<Tweet> GetUserTimeline(string screenName)
+        public User LookupUser(string screenName)
         {
-            string rawJson;
+            var rawJson = string.Empty;
 
-            //using(StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/scottgu_timeline.json")))
-            //{
-            //    //Läser in och stoppar in textfilen i en sträng.
-            //    rawJson = reader.ReadToEnd();
-            //}
+            #region JSON from api.twitter.com
 
-            //nyckel för förfrågningar
+            // Get access token.
             var oAuthTwitterWrapper = new OAuthTwitterWrapper();
             var accessToken = oAuthTwitterWrapper.GetAccessToken();
 
-            //URI för att ställa fråga.
-            var requestUriString = String.Format("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={0}&count=5", screenName);
+            // Authorized call to Twitter's API (protected resources).
+            var requestUriString = String.Format("https://api.twitter.com/1.1/users/lookup.json?screen_name={0}", screenName);
             var request = (HttpWebRequest)WebRequest.Create(requestUriString);
-            //komplettering av headern med authentisering
             request.Headers.Add("Authorization", String.Format("{0} {1}", accessToken.Type, accessToken.Token));
+            request.Method = "GET";
 
-            //man måste nästla för att stängning ska ske automatiskt
-            using(var response = request.GetResponse())
+            using (var response = request.GetResponse())
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 rawJson = reader.ReadToEnd();
             }
 
-            //gör om textfilen från Json till listobjekt med ref till tweet-objekt
-            return JArray.Parse(rawJson).Select(t => new Tweet(t)).ToList();
+            #endregion
+
+            #region JSON to/from file
+
+            ////dynamic parsedJson = JsonConvert.DeserializeObject(rawJson);
+            ////using (var writer = new StreamWriter(HttpContext.Current.Server.MapPath("~/App_Data/scottgu_user.json")))
+            ////{
+            ////    writer.WriteLine(JsonConvert.SerializeObject(parsedJson, Formatting.Indented));
+            ////}
+
+            //using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/scottgu_user.json")))
+            //{
+            //    rawJson = reader.ReadToEnd();
+            //}
+
+            #endregion
+
+            // Parse the JSON and return a user.
+            return JArray.Parse(rawJson).Select(u => new User(u)).SingleOrDefault();
+        }
+
+        public IEnumerable<Tweet> GetUserTimeLinde(User user)
+        {
+            var rawJson = string.Empty;
+
+            #region JSON from api.twitter.com
+
+            // Get access token.
+            var oAuthTwitterWrapper = new OAuthTwitterWrapper();
+            var accessToken = oAuthTwitterWrapper.GetAccessToken();
+
+            // Authorized call to Twitter's API (protected resources).
+            var requestUriString = String.Format("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={0}&count=5", user.ScreenName);
+            var request = (HttpWebRequest)WebRequest.Create(requestUriString);
+            request.Headers.Add("Authorization", String.Format("{0} {1}", accessToken.Type, accessToken.Token));
+
+            using (var response = request.GetResponse())
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                rawJson = reader.ReadToEnd();
+            }
+
+            #endregion
+
+            #region JSON to/from file
+
+            ////dynamic parsedJson = JsonConvert.DeserializeObject(rawJson);
+            ////using (var writer = new StreamWriter(HttpContext.Current.Server.MapPath("~/App_Data/scottgu_timeline.json")))
+            ////{
+            ////    writer.WriteLine(JsonConvert.SerializeObject(parsedJson, Formatting.Indented));
+            ////}
+
+            //using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/scottgu_timeline.json")))
+            //{
+            //    rawJson = reader.ReadToEnd();
+            //}
+
+            #endregion
+
+            // Parse the JSON and return a list with tweets.
+            return JArray.Parse(rawJson).Select(t => new Tweet(t, user)).ToList();
         }
     }
 }
